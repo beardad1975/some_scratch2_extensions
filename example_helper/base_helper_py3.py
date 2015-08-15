@@ -29,7 +29,7 @@ from http.server import HTTPServer
 
 import os, sys, urllib
 
-######  全域變數建議區 (放此處較易理解) #####
+######  全域變數建議區  #####
 ####################################################
 
 HELPER_NAME = "基本的Helper"
@@ -64,7 +64,8 @@ class CmdHandler(BaseHTTPRequestHandler):
             
         if cmd_list[0] == "hello" :
             print ("Hello World!")
- 
+
+        if cmd_list[0] != "poll" : print (self.path)
 
             
         
