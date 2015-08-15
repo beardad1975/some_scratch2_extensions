@@ -1,0 +1,15 @@
+{
+
+   "extensionName": "氣侯查詢(50444)",
+   "extensionPort": 50444,
+   "blockSpecs": [
+       ["w", "查詢%s氣候", "weatherQuery","Taoyuan"],
+       ["r", " %m.report 資訊", "reportData", "城市"]
+    ],
+  "menus" : {
+       "report" : [ "城市", "天氣", "目前溫度"]
+
+   }
+
+
+}
