@@ -1,0 +1,10 @@
+{
+
+   "extensionName": " 自訂積木 ",
+   "extensionPort": 50000,
+   "blockSpecs": [
+       [" ", "通常第一個程式的名字是？", "hello"],
+
+]
+
+}
