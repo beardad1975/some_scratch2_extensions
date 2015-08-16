@@ -26,17 +26,35 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from http.server import BaseHTTPRequestHandler
 from http.server import HTTPServer
+from urllib.parse import quote, unquote
 
-import os, sys, urllib
+import os, sys
+
+import win32com.client
 
 ######  全域變數建議區  #####
 ####################################################
 
-HELPER_NAME = "文字轉語音Helper"
+HELPER_NAME = "SAPI文字轉語音"
 HELPER_PORT = 50555
+
+VOICE_RATE = 0        #語音速度
+VOICE_VOLUME = 100    #語音音量
+
+
+SVSFDefault = 0
+SVSFlagsAsync = 1
+
 
 
 ####################################################
+
+
+speaker = win32com.client.Dispatch("SAPI.SpVoice")
+speaker.Rate = VOICE_RATE
+speaker.Volume = VOICE_VOLUME
+
+
 
 class CmdHandler(BaseHTTPRequestHandler):
     """
@@ -58,14 +76,27 @@ class CmdHandler(BaseHTTPRequestHandler):
         
         s = "不回傳資料"
 
-        ###### 處理Scratch送出的命令
-        ###### 若需回應Scratch的Poll命令，再把文字存在變數s ##
+        ###### 處理Scratch2送出的命令
+        ###### 若需回應Scratch2的Poll命令，再把文字存在變數s ##
         ##############################################################
-            
-        if cmd_list[0] == "hello" :
-            print ("Hello World!")
 
-        if cmd_list[0] != "poll" : print (self.path)
+        #轉語音
+        if cmd_list[0] == "ttsNoWait" :
+            voice_text = unquote(cmd_list[1])
+            speaker.Speak(voice_text,SVSFlagsAsync)
+
+        #轉語音(直到完畢)
+        if cmd_list[0] == "ttsWait" :
+            voice_text = unquote(cmd_list[2])
+            speaker.Speak(voice_text,SVSFDefault)
+
+        #語音速度( -10 ~ 10 )    
+        if cmd_list[0] == "voiceSpeed" :
+            speaker.Rate = int(cmd_list[1])
+
+        #語音音量( 100 ~ 0 )
+        if cmd_list[0] == "voiceVolume" :
+            speaker.Volume = int(cmd_list[1])
 
             
         

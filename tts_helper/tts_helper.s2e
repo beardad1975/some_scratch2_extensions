@@ -4,7 +4,7 @@
    "extensionPort": 50555,
    "blockSpecs": [
        [" ", "%s 轉語音", "ttsNoWait", "文字"],
-       ["w", "%s 轉語音(等待)", "ttsWait", "文字"],
+       ["w", "%s 轉語音並等待", "ttsWait", "文字"],
        [" ", "語音速度 %m.speed", "voiceSpeed", 0],
        [" ", "語音音量 %m.volume", "voiceVolume", 100]
 
